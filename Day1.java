@@ -17,12 +17,19 @@ public class Day1 {
             int len = fileData.size();
             String[] list = fileData.get(i).split("   ");
             int left = Integer.parseInt(list[0]);
+            leftt.add(left);
         }
         for(int i = 0; i < fileData.size(); i ++){
             int len = fileData.size();
             String[] list = fileData.get(i).split("   ");
-            int left = Integer.parseInt(list[0]);
             int right = Integer.parseInt(list[1]);
+            rightt.add(right);
+        }
+        Collections.sort(rightt);
+        Collections.sort(leftt);
+        for(int i = 0; i < fileData.size(); i ++){
+            int left = leftt.get(i);
+            int right = rightt.get(i);
             int distance = Math.abs(left - right);
             total += distance;
         }
