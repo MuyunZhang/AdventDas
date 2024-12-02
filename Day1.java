@@ -10,16 +10,13 @@ public class Day1 {
         int total = 0;
         ArrayList<String> fileData = getFileData("src/Day1Input");
         //String[] splitSample = sample.split(" ");
-        Integer[] leftt = new Integer[fileData.size()];
-        Integer[] rightt = new Integer[fileData.size()];
+        ArrayList<Integer> leftt = new ArrayList<>();
+        ArrayList<Integer> rightt = new ArrayList<>();
         String[] t = fileData.get(0).split("   ");
         for(int i = 0; i < fileData.size(); i ++){
             int len = fileData.size();
             String[] list = fileData.get(i).split("   ");
             int left = Integer.parseInt(list[0]);
-            int right = Integer.parseInt(list[1]);
-            int distance = Math.abs(left - right);
-            total += distance;
         }
         for(int i = 0; i < fileData.size(); i ++){
             int len = fileData.size();
