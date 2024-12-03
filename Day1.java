@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Day1 {
     public static void main(String[] args) {
         int total = 0;
+        int score = 0;
         ArrayList<String> fileData = getFileData("src/Day1Input");
         //String[] splitSample = sample.split(" ");
         ArrayList<Integer> leftt = new ArrayList<>();
@@ -34,8 +35,19 @@ public class Day1 {
             total += distance;
         }
         System.out.println(total);
-        // you now have an ArrayList of Strings for each number in the file
-        // do Advent 2020 day 1!
+
+        for(int i = 0; i < fileData.size(); i ++){
+            int k = leftt.get(i);
+            int count = 0;
+            for(int j = 0; j < fileData.size(); j ++){
+                int hey = rightt.get(j);
+                if(k == hey){
+                    count ++;
+                }
+            }
+            score += (k * count);
+        }
+        System.out.println(score);
     }
 
 
