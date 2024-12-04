@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Day2 {
     public static void main(String[] args) {
         int total = 0;
-        int score = 0;
+        int fix = 0;
         ArrayList<String> fileData = getFileData("src/Day2Input");
         //String[] splitSample = sample.split(" ");
 
@@ -20,6 +20,7 @@ public class Day2 {
 
         for(int i = 0; i < list.size(); i ++){
             int count = 0;
+            boolean fixable = false;
             for(int k = 1; k < list.get(i).length; k ++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
@@ -44,9 +45,33 @@ public class Day2 {
             if (count == list.get(i).length - 1) {
                 total++;
             }
+            if(count == list.get(i).length - 2){
+                for(int j = 0; i < list.size(); i ++) {
+                    int hi = 0;
+                    int position;
+                    for (int k = 1; k < list.get(i).length; k++) {
+                        int f = Integer.parseInt(list.get(i)[k - 1]);
+                        int s = Integer.parseInt(list.get(i)[k]);
+                        if (f > s && f - s > 0 && f - s < 4) {
+                            count++;
+                        }
+                        else {
+                            position = k;
+                        }
+                    }
+                }
+            }
+
+
         }
         System.out.println(total);
+        // part 2
+
+
+
     }
+
+
 
 
     public static ArrayList<String> getFileData(String fileName) {
