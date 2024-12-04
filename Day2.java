@@ -18,20 +18,31 @@ public class Day2 {
             list.add(h);
         }
 
-        for(int i = 0; i < list.size() - 1; i ++){
+        for(int i = 0; i < list.size(); i ++){
             int count = 0;
-            for(int k = 1; k < 5; k ++) {
+            for(int k = 1; k < list.get(i).length; k ++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
-                if (f < s && (s - f) > 0 && (s - f) < 4) {
-                   count ++;
-                }
-                else if (f > s && (f - s) > 0 && (f - s) < 4) {
+                if (f < s && s - f > 0 && s - f < 4) {
                     count ++;
                 }
             }
-            if(count == 5){
-                total ++;
+            if(count == list.get(i).length - 1) {
+                total++;
+            }
+        }
+
+        for(int i = 0; i < list.size(); i ++){
+            int count = 0;
+            for (int k = 1; k < list.get(i).length; k++) {
+                int f = Integer.parseInt(list.get(i)[k - 1]);
+                int s = Integer.parseInt(list.get(i)[k]);
+                if (f > s && f - s > 0 && f - s < 4) {
+                    count++;
+                }
+            }
+            if (count == list.get(i).length - 1) {
+                total++;
             }
         }
         System.out.println(total);
