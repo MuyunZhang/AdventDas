@@ -12,7 +12,6 @@ public class Day2 {
         //String[] splitSample = sample.split(" ");
 
         ArrayList<String[]> list = new ArrayList();
-
         for(int i = 0; i < fileData.size(); i ++){
             String[] h = fileData.get(i).split(" ");
             list.add(h);
@@ -20,7 +19,6 @@ public class Day2 {
 
         for(int i = 0; i < list.size(); i ++){
             int count = 0;
-            boolean fixable = false;
             for(int k = 1; k < list.get(i).length; k ++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
@@ -28,8 +26,33 @@ public class Day2 {
                     count ++;
                 }
             }
-            if(count == list.get(i).length - 1) {
+            if(count == (list.get(i).length - 1)) {
                 total++;
+            }
+            else if(count == list.get(i).length - 2){
+                for(int j = 0; j < list.size(); j ++) {
+                    int recount = 0;
+                    int position = -1;
+                    for (int k = 1; k < list.get(j).length - 1; k++) {
+                        int t = Integer.parseInt(list.get(j)[k + 1]);
+                        int f = Integer.parseInt(list.get(j)[k - 1]);
+                        int s = Integer.parseInt(list.get(j)[k]);
+                        if (f < s && s - f > 0 && s - f < 4) {
+                            recount++;
+                        }
+                        else {
+                            if(t > s && t - s > 0 && t - s < 4){
+                                position = k - 1;
+                            }
+                            else {
+                                position = k;
+                            }
+                        }
+                    }
+                    if(position > -1 && recount == count){
+                        fix ++;
+                    }
+                }
             }
         }
 
@@ -45,30 +68,35 @@ public class Day2 {
             if (count == list.get(i).length - 1) {
                 total++;
             }
-            if(count == list.get(i).length - 2){
-                for(int j = 0; i < list.size(); i ++) {
-                    int hi = 0;
-                    int position;
-                    for (int k = 1; k < list.get(i).length; k++) {
-                        int f = Integer.parseInt(list.get(i)[k - 1]);
-                        int s = Integer.parseInt(list.get(i)[k]);
+            else if(count == list.get(i).length - 2){
+                for(int j = 0; j < list.size(); j ++) {
+                    int recount = 0;
+                    int position = -1;
+                    for (int k = 1; k < list.get(j).length - 1; k++) {
+                        int t = Integer.parseInt(list.get(j)[k + 1]);
+                        int f = Integer.parseInt(list.get(j)[k - 1]);
+                        int s = Integer.parseInt(list.get(j)[k]);
                         if (f > s && f - s > 0 && f - s < 4) {
-                            count++;
+                            recount++;
                         }
                         else {
-                            position = k;
+                            if(s > t && s - t > 0 && s - t < 4){
+                                position = k - 1;
+                            }
+                            else {
+                                position = k;
+                            }
                         }
+                    }
+                    if(position > -1 && recount == count){
+                        fix ++;
                     }
                 }
             }
-
-
         }
         System.out.println(total);
-        // part 2
-
-
-
+        System.out.println(fix);
+        System.out.println(fix + total);
     }
 
 
