@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Arrays;
 
 public class Day2 {
     public static void main(String[] args) {
@@ -12,9 +12,14 @@ public class Day2 {
         //String[] splitSample = sample.split(" ");
 
         ArrayList<String[]> list = new ArrayList();
+        ArrayList<String[]> rlist = new ArrayList();
         for(int i = 0; i < fileData.size(); i ++){
             String[] h = fileData.get(i).split(" ");
             list.add(h);
+        }
+        for(int i = 0; i < fileData.size(); i ++){
+            String[] h = fileData.get(i).split(" ");
+            rlist.add(h);
         }
 
         for(int i = 0; i < list.size(); i ++){
@@ -29,10 +34,11 @@ public class Day2 {
             if(count == (list.get(i).length - 1)) {
                 total++;
             }
-            else if(count == list.get(i).length - 2){
+            else {
                 for(int j = 0; j < list.size(); j ++) {
                     int recount = 0;
                     int position = -1;
+                    int times = 0;
                     for (int k = 1; k < list.get(j).length - 1; k++) {
                         int t = Integer.parseInt(list.get(j)[k + 1]);
                         int f = Integer.parseInt(list.get(j)[k - 1]);
@@ -43,35 +49,57 @@ public class Day2 {
                         else {
                             if(t > s && t - s > 0 && t - s < 4){
                                 position = k - 1;
+                                times ++;
                             }
                             else {
                                 position = k;
+                                times ++;
                             }
                         }
                     }
-                    if(position > -1 && recount == count){
-                        fix ++;
+                    if(position > -1 && recount >= count && times == 1) {
+                        int re = 0;
+                        for (int k = 1; k < list.get(j).length; k++) {
+                            if(position == 0){
+                                k ++;
+                            }
+                            else if (k == position) {
+                                k++;
+                            }
+                            if (k < list.get(j).length) {
+                                int f = Integer.parseInt(list.get(j)[k - 1]);
+                                int s = Integer.parseInt(list.get(j)[k]);
+                                if (f < s && s - f > 0 && s - f < 4) {
+                                    re++;
+                                }
+                            }
+                        }
+                        if (re == (list.get(j).length - 2)) {
+                            fix++;
+                        }
                     }
                 }
             }
         }
+        //2nd
 
         for(int i = 0; i < list.size(); i ++){
             int count = 0;
-            for (int k = 1; k < list.get(i).length; k++) {
+            for(int k = 1; k < list.get(i).length; k ++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
                 if (f > s && f - s > 0 && f - s < 4) {
                     count++;
                 }
             }
-            if (count == list.get(i).length - 1) {
+            if(count == (list.get(i).length - 1)) {
                 total++;
             }
-            else if(count == list.get(i).length - 2){
+            else {
                 for(int j = 0; j < list.size(); j ++) {
                     int recount = 0;
                     int position = -1;
+                    int times = 0;
                     for (int k = 1; k < list.get(j).length - 1; k++) {
                         int t = Integer.parseInt(list.get(j)[k + 1]);
                         int f = Integer.parseInt(list.get(j)[k - 1]);
@@ -82,14 +110,34 @@ public class Day2 {
                         else {
                             if(s > t && s - t > 0 && s - t < 4){
                                 position = k - 1;
+                                times ++;
                             }
                             else {
                                 position = k;
+                                times ++;
                             }
                         }
                     }
-                    if(position > -1 && recount == count){
-                        fix ++;
+                    if(position > -1 && recount >= count && times == 1) {
+                        int re = 0;
+                        for (int k = 1; k < list.get(j).length; k++) {
+                            if(position == 0){
+                                k ++;
+                            }
+                            else if (k == position) {
+                                k++;
+                            }
+                            if (k < list.get(j).length) {
+                                int f = Integer.parseInt(list.get(j)[k - 1]);
+                                int s = Integer.parseInt(list.get(j)[k]);
+                                if (f > s && f - s > 0 && f - s < 4) {
+                                    re++;
+                                }
+                            }
+                        }
+                        if (re == (list.get(j).length - 2)) {
+                            fix++;
+                        }
                     }
                 }
             }
