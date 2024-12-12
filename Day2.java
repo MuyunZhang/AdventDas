@@ -28,27 +28,32 @@ public class Day2 {
         }
 
         for (int i = 0; i < list.size(); i++) {
-            int count = 0;
+            boolean count = true;
             int position = -1;
             int times = 0;
             for (int k = 1; k < list.get(i).length; k++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
                 if (f < s && s - f > 0 && s - f < 4) {
-                    count++;
+
+                }
+                else {
+                    count = false;
                 }
             }
-            if (count == (list.get(i).length - 1)) {
+            if (count) {
                 total++;
-                rlist.set(i,2);
+                llist.set(i,2);
             }
             else {
+                //15 16 17 17 19 22 25 31
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
                     if (f < s && s - f > 0 && s - f < 4) {
-                    } else {
+                    }
+                    else {
                         if (t > s && t - s > 0 && t - s < 4) {
                             position = k - 1;
                             times++;
@@ -59,16 +64,19 @@ public class Day2 {
                         }
                     }
                 }
-                int len = list.get(i).length;
-                int se = Integer.parseInt(list.get(i)[len - 1]);
-                int ss = list.get(i).length - 1;
-                int fi = Integer.parseInt(list.get(i)[len - 2]);
-                if (fi < se && se - fi > 0 && se - fi < 4) {
+                if(position <= 1){
+                    int len = list.get(i).length;
+                    int se = Integer.parseInt(list.get(i)[len - 1]);
+                    int ss = list.get(i).length - 1;
+                    int fi = Integer.parseInt(list.get(i)[len - 2]);
+                    if (fi < se && se - fi > 0 && se - fi < 4) {
+                    }
+                    else {
+                        times ++;
+                        position = ss;
+                    }
                 }
-                else {
-                    times ++;
-                    position = ss;
-                }
+
                 if (position > -1 && times == 1) {
                     boolean con = true;
                     for (int k = 1; k < list.get(i).length; k++) {
@@ -129,6 +137,9 @@ public class Day2 {
                         int hi = llist.get(i);
                         llist.set(i, hi + 1);
                     }
+                    else {
+                        System.out.println(i);
+                    }
                 }
             }
         }
@@ -137,24 +148,29 @@ public class Day2 {
         for (int i = 0; i < list.size(); i++) {
             int position = -1;
             int times = 0;
-            int count = 0;
+            boolean count = true;
             for (int k = 1; k < list.get(i).length; k++) {
                 int f = Integer.parseInt(list.get(i)[k - 1]);
                 int s = Integer.parseInt(list.get(i)[k]);
                 if (f > s && f - s > 0 && f - s < 4) {
-                    count++;
+
+                }
+                else {
+                    count = false;
                 }
             }
-            if (count == (list.get(i).length - 1)) {
+            if (count) {
                 total++;
-            } else if (rlist.get(i) == 1){
+            }
+            else if(llist.get(i)==1){
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
                     if (f > s && f - s > 0 && f - s < 4) {
 
-                    } else {
+                    }
+                    else {
                         if (s > t && s - t > 0 && s - t < 4) {
                             position = k - 1;
                             times++;
@@ -164,15 +180,17 @@ public class Day2 {
                         }
                     }
                 }
-                int len = list.get(i).length;
-                int se = Integer.parseInt(list.get(i)[len - 1]);
-                int ss = list.get(i).length - 1;
-                int fi = Integer.parseInt(list.get(i)[len - 2]);
-                if (se < fi && fi - se > 0 && fi - se < 4) {
-
-                } else {
-                    times++;
-                    position = ss;
+                if(position <= 1){
+                    int len = list.get(i).length;
+                    int se = Integer.parseInt(list.get(i)[len - 1]);
+                    int ss = list.get(i).length - 1;
+                    int fi = Integer.parseInt(list.get(i)[len - 2]);
+                    if (fi > se && fi - se > 0 && fi - se < 4) {
+                    }
+                    else {
+                        times ++;
+                        position = ss;
+                    }
                 }
                 if (position > -1 && times == 1) {
                     boolean con = true;
@@ -229,6 +247,9 @@ public class Day2 {
                         fix++;
                         int hi = llist.get(i);
                         llist.set(i,hi + 1);
+                    }
+                    else {
+                        System.out.println(i);
                     }
                 }
             }
