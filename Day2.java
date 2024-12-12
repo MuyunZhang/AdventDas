@@ -46,7 +46,7 @@ public class Day2 {
                 llist.set(i,2);
             }
             else {
-                //15 16 17 17 19 22 25 31
+                //15 16 17 19 22 26 24
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
