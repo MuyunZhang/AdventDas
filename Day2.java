@@ -46,7 +46,7 @@ public class Day2 {
                 llist.set(i,2);
             }
             else {
-                //15 16 17 19 22 26 24
+                //10 11 12 19 13
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
@@ -64,7 +64,7 @@ public class Day2 {
                         }
                     }
                 }
-                if(position <= 1){
+                if(position <= 1 && position != list.get(i).length-1){
                     int len = list.get(i).length;
                     int se = Integer.parseInt(list.get(i)[len - 1]);
                     int ss = list.get(i).length - 1;
@@ -75,6 +75,7 @@ public class Day2 {
                         times ++;
                         position = ss;
                     }
+
                 }
 
                 if (position > -1 && times == 1) {
@@ -162,7 +163,7 @@ public class Day2 {
             if (count) {
                 total++;
             }
-            else if(llist.get(i)==1){
+            else if(llist.get(i)<2){
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
@@ -180,7 +181,7 @@ public class Day2 {
                         }
                     }
                 }
-                if(position <= 1){
+                if(position <= 1  && position != list.get(i).length-1){
                     int len = list.get(i).length;
                     int se = Integer.parseInt(list.get(i)[len - 1]);
                     int ss = list.get(i).length - 1;
@@ -192,7 +193,7 @@ public class Day2 {
                         position = ss;
                     }
                 }
-                if (position > -1 && times == 1) {
+                if (position > -1 && times == 0) {
                     boolean con = true;
                     for (int k = 1; k < list.get(i).length; k++) {
                         if (position == 0) {
