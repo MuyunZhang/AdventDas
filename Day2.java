@@ -14,9 +14,19 @@ public class Day2 {
         ArrayList<String[]> list = new ArrayList();
         ArrayList<Integer> llist = new ArrayList();
         ArrayList<Integer> rlist = new ArrayList();
+        ArrayList<ArrayList> w = new ArrayList();
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
             list.add(h);
+        }
+        for (int i = 0; i < fileData.size(); i++) {
+            String[] h = fileData.get(i).split(" ");
+            ArrayList<Integer> hi = new ArrayList<>();
+            for(int s = 0; s < h.length; s++){
+                hi.add(Integer.parseInt(h[s]));
+            }
+            w.add(hi);
+
         }
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
@@ -79,67 +89,20 @@ public class Day2 {
                 }
 
                 if (position > -1 && times == 1) {
-                    boolean con = true;
-                    for (int k = 1; k < list.get(i).length; k++) {
-                        if (position == 0) {
-                            int f = Integer.parseInt(list.get(i)[1]);
-                            int s = Integer.parseInt(list.get(i)[2]);
-                            if (f < s && s - f > 0 && s - f < 4) {
+                    w.get(i).remove(position);
+                    boolean hey = true;
+                    for (int d = 1; d < w.get(i).size(); d++) {
+                        int f = Integer.parseInt(list.get(i)[d - 1]);
+                        int s = Integer.parseInt(list.get(i)[d]);
+                        if (f < s && s - f > 0 && s - f < 4) {
 
-                            } else {
-                                con = false;
-                            }
                         }
-                        else if (position != k && position != k - 1) {
-                            int f = Integer.parseInt(list.get(i)[k - 1]);
-                            int s = Integer.parseInt(list.get(i)[k]);
-                            if (f < s && s - f > 0 && s - f < 4) {
-
-                            } else {
-                                con = false;
-                            }
-                        }
-                        else if(position == k - 1 && k > 1){
-                            int right = k;
-                            int left = k - 2;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f < s && s - f > 0 && s - f < 4) {
-
-                            } else {
-                                con = false;
-                            }
-                        }
-                        else if (k == position && k < list.get(i).length - 1) {
-                            int right = k + 1;
-                            int left = k - 1;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f < s && s - f > 0 && s - f < 4) {
-
-                            } else {
-                                con = false;
-                            }
-                        }
-                        else if (k == position){
-                            int right = k - 1;
-                            int left = k - 2;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f < s && s - f > 0 && s - f < 4) {
-
-                            } else {
-                                con = false;
-                            }
+                        else {
+                            hey = false;
                         }
                     }
-                    if (con) {
-                        fix++;
-                        int hi = llist.get(i);
-                        llist.set(i, hi + 1);
-                    }
-                    else {
-                        System.out.println(i);
+                    if(hey = true){
+                        fix ++;
                     }
                 }
             }
@@ -194,70 +157,23 @@ public class Day2 {
                     }
                 }
                 if (position > -1 && times == 0) {
-                    boolean con = true;
-                    for (int k = 1; k < list.get(i).length; k++) {
-                        if (position == 0) {
-                            int f = Integer.parseInt(list.get(i)[1]);
-                            int s = Integer.parseInt(list.get(i)[2]);
-                            if (f > s && f - s > 0 && f - s < 4) {
+                    w.get(i).remove(position);
+                    boolean hey = true;
 
-                            } else {
-                                con = false;
-                            }
-                        } else if (position != k && position != k - 1) {
-                            int f = Integer.parseInt(list.get(i)[k - 1]);
-                            int s = Integer.parseInt(list.get(i)[k]);
-                            if (f > s && f - s > 0 && f - s < 4) {
+                    for (int d = 1; d < w.get(i).size(); d++) {
+                        int f = Integer.parseInt(list.get(i)[d - 1]);
+                        int s = Integer.parseInt(list.get(i)[d]);
+                        if (f > s && f - s > 0 && f - s < 4) {
 
-                            } else {
-                                con = false;
-                            }
-                        } else if (position == k - 1 && k > 1) {
-                            int right = k;
-                            int left = k - 2;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f > s && f - s > 0 && f - s < 4) {
-
-                            } else {
-                                con = false;
-                            }
-                        } else if (k == position && k < list.get(i).length - 1) {
-                            int right = k + 1;
-                            int left = k - 1;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f > s && f - s > 0 && f - s < 4) {
-
-                            } else {
-                                con = false;
-                            }
-                        } else if (k == position) {
-                            int right = k - 1;
-                            int left = k - 2;
-                            int f = Integer.parseInt(list.get(i)[left]);
-                            int s = Integer.parseInt(list.get(i)[right]);
-                            if (f > s && f - s > 0 && f - s < 4) {
-
-                            } else {
-                                con = false;
-                            }
+                        }
+                        else {
+                            hey = false;
                         }
                     }
-                    if (con) {
-                        fix++;
-                        int hi = llist.get(i);
-                        llist.set(i,hi + 1);
-                    }
-                    else {
-                        System.out.println(i);
+                    if(hey = true){
+                        fix ++;
                     }
                 }
-            }
-        }
-        for(int i = 0; i < llist.size(); i ++){
-            if(llist.get(i)>2){
-                wrong ++;
             }
         }
         System.out.println(wrong);
