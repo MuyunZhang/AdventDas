@@ -8,6 +8,7 @@ public class Day2 {
         int total = 0;
         int wrong = 0;
         int fix = 0;
+        int fix2 = 0;
         ArrayList<String> fileData = getFileData("src/Day2Input");
         //String[] splitSample = sample.split(" ");
 
@@ -39,6 +40,7 @@ public class Day2 {
 
         for (int i = 0; i < list.size(); i++) {
             boolean count = true;
+            int sub = i;
             int position = -1;
             int times = 0;
             for (int k = 1; k < list.get(i).length; k++) {
@@ -53,28 +55,26 @@ public class Day2 {
             }
             if (count) {
                 total++;
-                llist.set(i,2);
             }
             else {
                 //10 11 12 19 13
                 for (int k = 1; k < list.get(i).length - 1; k++) {
-                    int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
+                    int t = Integer.parseInt(list.get(i)[k + 1]);
                     if (f < s && s - f > 0 && s - f < 4) {
                     }
                     else {
+                        times ++;
                         if (t > s && t - s > 0 && t - s < 4) {
                             position = k - 1;
-                            times++;
                         }
                         else {
                             position = k;
-                            times++;
                         }
                     }
                 }
-                if(position <= 1 && position != list.get(i).length-1){
+                if(times <= 1){
                     int len = list.get(i).length;
                     int se = Integer.parseInt(list.get(i)[len - 1]);
                     int ss = list.get(i).length - 1;
@@ -89,11 +89,12 @@ public class Day2 {
                 }
 
                 if (position > -1 && times == 1) {
+                    wrong ++;
                     w.get(i).remove(position);
                     boolean hey = true;
                     for (int d = 1; d < w.get(i).size(); d++) {
-                        int f = Integer.parseInt(list.get(i)[d - 1]);
-                        int s = Integer.parseInt(list.get(i)[d]);
+                        int f = (int) w.get(i).get(d - 1);
+                        int s = (int) w.get(i).get(d);
                         if (f < s && s - f > 0 && s - f < 4) {
 
                         }
@@ -101,7 +102,7 @@ public class Day2 {
                             hey = false;
                         }
                     }
-                    if(hey = true){
+                    if(hey){
                         fix ++;
                     }
                 }
@@ -126,7 +127,7 @@ public class Day2 {
             if (count) {
                 total++;
             }
-            else if(llist.get(i)<2){
+            else {
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
@@ -135,16 +136,15 @@ public class Day2 {
 
                     }
                     else {
+                        times ++;
                         if (s > t && s - t > 0 && s - t < 4) {
                             position = k - 1;
-                            times++;
                         } else {
                             position = k;
-                            times++;
                         }
                     }
                 }
-                if(position <= 1  && position != list.get(i).length-1){
+                if(times <= 1){
                     int len = list.get(i).length;
                     int se = Integer.parseInt(list.get(i)[len - 1]);
                     int ss = list.get(i).length - 1;
@@ -157,12 +157,13 @@ public class Day2 {
                     }
                 }
                 if (position > -1 && times == 0) {
+                    wrong ++;
                     w.get(i).remove(position);
                     boolean hey = true;
 
                     for (int d = 1; d < w.get(i).size(); d++) {
-                        int f = Integer.parseInt(list.get(i)[d - 1]);
-                        int s = Integer.parseInt(list.get(i)[d]);
+                        int f = (int) w.get(i).get(d - 1);
+                        int s = (int) w.get(i).get(d);
                         if (f > s && f - s > 0 && f - s < 4) {
 
                         }
@@ -170,16 +171,49 @@ public class Day2 {
                             hey = false;
                         }
                     }
-                    if(hey = true){
+                    if(hey){
                         fix ++;
                     }
                 }
             }
         }
-        System.out.println(wrong);
+        for(int i = 0; i < w.size(); i ++){
+            boolean count = true;
+            for (int k = 1; k < w.get(i).size(); k++) {
+                int f = (int) w.get(i).get(k - 1);
+                int s = (int) w.get(i).get(k);
+                if (f < s && s - f > 0 && s - f < 4) {
+
+                }
+                else {
+                    count = false;
+                }
+            }
+            if (count) {
+                fix2++;
+            }
+        }
+        for(int i = 0; i < w.size(); i ++){
+            boolean count = true;
+            for (int k = 1; k < w.get(i).size(); k++) {
+                int f = (int) w.get(i).get(k - 1);
+                int s = (int) w.get(i).get(k);
+                if (f > s && f - s > 0 && f - s < 4) {
+
+                }
+                else {
+                    count = false;
+                }
+            }
+            if (count) {
+                fix2++;
+            }
+        }
         System.out.println(total);
+        System.out.println(wrong);
         System.out.println(fix);
         System.out.println(fix + total);
+        System.out.println(fix2);
     }
 
 
