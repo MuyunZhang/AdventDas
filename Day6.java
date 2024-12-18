@@ -15,15 +15,27 @@ public class Day6 {
         ArrayList<Integer> rightt = new ArrayList<>();
         ArrayList<String> hi = new ArrayList<>();
         int dex = 0;
+        int fuc = 0;
+        boolean right = false;
         for(int i = 0; i < fileData.size(); i ++){
             if(fileData.get(i).contains("^")){
                 System.out.println(fileData.get(i));
                 System.out.println(i);
                 dex = fileData.get(i).indexOf("^");
+                fuc = i;
             }
             hi.add(fileData.get(i));
         }
         System.out.println(dex);
+        boolean hey = true;
+        int x = dex;
+        int y = fuc;
+        while(hey){
+            x ++;
+            if(hi.get(y).substring(x, x + 1).equals("#")){
+
+            }
+        }
 
 
 
