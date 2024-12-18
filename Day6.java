@@ -42,7 +42,9 @@ public class Day6 {
 
 
     }
-
+    public String direction(){
+        return "";
+    }
 
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
