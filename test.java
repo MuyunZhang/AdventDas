@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Day2 {
+public class test {
     public static void main(String[] args) {
         int total = 0;
         int wrong = 0;
@@ -37,7 +37,7 @@ public class Day2 {
             String[] h = fileData.get(i).split(" ");
             llist.add(1);
         }
-        System.out.println(w.get(0).get(5));
+        System.out.println(w.get(999).get(5));
 
         for (int i = 0; i < list.size(); i++) {
             boolean count = true;
@@ -63,6 +63,17 @@ public class Day2 {
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
                     int t = Integer.parseInt(list.get(i)[k + 1]);
+                    if(k == list.get(i).length - 2){
+                        if(s < t && t - s > 0 && t - s < 4){
+
+                        }
+                        else if(f < s && s - f > 0 && s - f < 4){
+                            position = k + 1;
+                        }
+                        else{
+                            position = k;
+                        }
+                    }
                     if (f < s && s - f > 0 && s - f < 4) {
                     }
                     else {
@@ -75,37 +86,8 @@ public class Day2 {
                         }
                     }
                 }
-                if(times <= 1){
-                    int len = list.get(i).length;
-                    int se = Integer.parseInt(list.get(i)[len - 1]);
-                    int ss = list.get(i).length - 1;
-                    int fi = Integer.parseInt(list.get(i)[len - 2]);
-                    if (fi < se && se - fi > 0 && se - fi < 4) {
-                    }
-                    else {
-                        times ++;
-                        position = ss;
-                    }
-
-                }
-
-                if (position > -1) {
-                    wrong ++;
+                if(position >= -1){
                     w.get(i).remove(position);
-                    boolean hey = true;
-                    for (int d = 1; d < w.get(i).size(); d++) {
-                        int f = (int) w.get(i).get(d - 1);
-                        int s = (int) w.get(i).get(d);
-                        if (f < s && s - f > 0 && s - f < 4) {
-
-                        }
-                        else {
-                            hey = false;
-                        }
-                    }
-                    if(hey){
-                        fix ++;
-                    }
                 }
             }
         }
@@ -134,6 +116,17 @@ public class Day2 {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
+                    if(k == list.get(i).length - 2){
+                        if(s > t && s - t > 0 && s - t < 4){
+
+                        }
+                        else if(f > s && f - s > 0 && f - s < 4){
+                            position = k + 1;
+                        }
+                        else{
+                            position = k;
+                        }
+                    }
                     if (f > s && f - s > 0 && f - s < 4) {
 
                     }
@@ -146,36 +139,8 @@ public class Day2 {
                         }
                     }
                 }
-                if(times <= 1){
-                    int len = list.get(i).length;
-                    int se = Integer.parseInt(list.get(i)[len - 1]);
-                    int ss = list.get(i).length - 1;
-                    int fi = Integer.parseInt(list.get(i)[len - 2]);
-                    if (fi > se && fi - se > 0 && fi - se < 4) {
-                    }
-                    else {
-                        times ++;
-                        position = ss;
-                    }
-                }
                 if (position > -1) {
-                    wrong ++;
                     w.get(i).remove(position);
-                    boolean hey = true;
-
-                    for (int d = 1; d < w.get(i).size(); d++) {
-                        int f = (int) w.get(i).get(d - 1);
-                        int s = (int) w.get(i).get(d);
-                        if (f > s && f - s > 0 && f - s < 4) {
-
-                        }
-                        else {
-                            hey = false;
-                        }
-                    }
-                    if(hey){
-                        fix ++;
-                    }
                 }
             }
         }
