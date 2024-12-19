@@ -13,6 +13,7 @@ public class test {
         //String[] splitSample = sample.split(" ");
 
         ArrayList<String[]> list = new ArrayList();
+        ArrayList<String[]> ist = new ArrayList();
         ArrayList<Integer> llist = new ArrayList();
         ArrayList<Integer> rlist = new ArrayList();
         ArrayList<ArrayList> w = new ArrayList();
@@ -22,13 +23,17 @@ public class test {
         }
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
+            ist.add(h);
+        }
+        for (int i = 0; i < fileData.size(); i++) {
+            String[] h = fileData.get(i).split(" ");
             ArrayList<Integer> hi = new ArrayList<>();
             for(int s = 0; s < h.length; s++){
                 hi.add(Integer.parseInt(h[s]));
             }
             w.add(hi);
-
         }
+
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
             rlist.add(1);
@@ -38,6 +43,7 @@ public class test {
             llist.add(1);
         }
         System.out.println(w.get(999).get(5));
+        System.out.println(w.get(4));
 
         for (int i = 0; i < list.size(); i++) {
             boolean count = true;
@@ -56,6 +62,7 @@ public class test {
             }
             if (count) {
                 total++;
+                llist.set(i,4);
             }
             else {
                 //10 11 12 19 13
@@ -111,7 +118,7 @@ public class test {
             if (count) {
                 total++;
             }
-            else {
+            else if(llist.get(i) < 4){
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
@@ -140,6 +147,8 @@ public class test {
                     }
                 }
                 if (position > -1) {
+                    System.out.println(i);
+                    System.out.println(position);
                     w.get(i).remove(position);
                 }
             }
