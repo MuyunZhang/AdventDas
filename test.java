@@ -62,7 +62,6 @@ public class test {
             }
             if (count) {
                 total++;
-                llist.set(i,4);
             }
             else {
                 //10 11 12 19 13
@@ -95,6 +94,7 @@ public class test {
                 }
                 if(position >= -1){
                     w.get(i).remove(position);
+                    llist.set(i,4);
                 }
             }
         }
@@ -118,7 +118,7 @@ public class test {
             if (count) {
                 total++;
             }
-            else if(llist.get(i) < 4){
+            else {
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
@@ -146,9 +146,7 @@ public class test {
                         }
                     }
                 }
-                if (position > -1) {
-                    System.out.println(i);
-                    System.out.println(position);
+                if (position > -1 && llist.get(i)<4) {
                     w.get(i).remove(position);
                 }
             }
