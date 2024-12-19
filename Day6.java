@@ -16,6 +16,7 @@ public class Day6 {
         ArrayList<String> hi = new ArrayList<>();
         int dex = 0;
         int fuc = 0;
+        String direction = "up";
         boolean right = false;
         for(int i = 0; i < fileData.size(); i ++){
             if(fileData.get(i).contains("^")){
@@ -31,21 +32,43 @@ public class Day6 {
         int x = dex;
         int y = fuc;
         while(hey){
+            if(direction.equals("right")){
+                x ++;
+            }
+            if(direction.equals("left")){
+                x --;
+            }
+            if(direction.equals("up")){
+                y ++;
+            }
+            if(direction.equals("down")){
+                y --;
+            }
             x ++;
             if(hi.get(y).substring(x, x + 1).equals("#")){
-
+                direction = direct(direction);
             }
+
         }
 
 
 
-
-
     }
-    public String direction(){
-        return "";
+    public static String direct(String k){
+        if(k.equals("up")){
+            k = "right";
+        }
+        else if(k.equals("right")){
+            k = "down";
+        }
+        else if(k.equals("down")){
+            k = "left";
+        }
+        else if(k.equals("left")){
+            k = "up";
+        }
+        return k;
     }
-
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {
