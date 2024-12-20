@@ -13,17 +13,14 @@ public class test {
         //String[] splitSample = sample.split(" ");
 
         ArrayList<String[]> list = new ArrayList();
-        ArrayList<String[]> ist = new ArrayList();
+        ArrayList<Integer> ist = new ArrayList();
         ArrayList<Integer> llist = new ArrayList();
         ArrayList<Integer> rlist = new ArrayList();
         ArrayList<ArrayList> w = new ArrayList();
+        ArrayList<ArrayList> q = new ArrayList();
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
             list.add(h);
-        }
-        for (int i = 0; i < fileData.size(); i++) {
-            String[] h = fileData.get(i).split(" ");
-            ist.add(h);
         }
         for (int i = 0; i < fileData.size(); i++) {
             String[] h = fileData.get(i).split(" ");
@@ -32,6 +29,14 @@ public class test {
                 hi.add(Integer.parseInt(h[s]));
             }
             w.add(hi);
+        }
+        for (int i = 0; i < fileData.size(); i++) {
+            String[] h = fileData.get(i).split(" ");
+            ArrayList<Integer> hi = new ArrayList<>();
+            for(int s = 0; s < h.length; s++){
+                hi.add(Integer.parseInt(h[s]));
+            }
+            q.add(hi);
         }
 
         for (int i = 0; i < fileData.size(); i++) {
@@ -47,7 +52,7 @@ public class test {
 
         for (int i = 0; i < list.size(); i++) {
             boolean count = true;
-            int sub = i;
+            int sub = 0;
             int position = -1;
             int times = 0;
             for (int k = 1; k < list.get(i).length; k++) {
@@ -69,17 +74,6 @@ public class test {
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
                     int t = Integer.parseInt(list.get(i)[k + 1]);
-                    if(k == list.get(i).length - 2){
-                        if(s < t && t - s > 0 && t - s < 4){
-
-                        }
-                        else if(f < s && s - f > 0 && s - f < 4){
-                            position = k + 1;
-                        }
-                        else{
-                            position = k;
-                        }
-                    }
                     if (f < s && s - f > 0 && s - f < 4) {
                     }
                     else {
@@ -91,9 +85,23 @@ public class test {
                             position = k;
                         }
                     }
+                    if(k == list.get(i).length - 2){
+                        if(s < t && t - s > 0 && t - s < 4){
+
+                        }
+                        else if(f < s && s - f > 0 && s - f < 4 && f < t && t - s > 0 && t - f < 4){
+                            position = k;
+                            times ++;
+                        }
+                        else{
+                            position = k + 1;
+                            times ++;
+                        }
+                    }
                 }
-                if(position >= -1){
+                if(position >= -1 && times == 1){
                     w.get(i).remove(position);
+                    ist.add(1);
                     llist.set(i,4);
                 }
             }
@@ -118,22 +126,11 @@ public class test {
             if (count) {
                 total++;
             }
-            else {
+            else if(llist.get(i) < 4){
                 for (int k = 1; k < list.get(i).length - 1; k++) {
                     int t = Integer.parseInt(list.get(i)[k + 1]);
                     int f = Integer.parseInt(list.get(i)[k - 1]);
                     int s = Integer.parseInt(list.get(i)[k]);
-                    if(k == list.get(i).length - 2){
-                        if(s > t && s - t > 0 && s - t < 4){
-
-                        }
-                        else if(f > s && f - s > 0 && f - s < 4){
-                            position = k + 1;
-                        }
-                        else{
-                            position = k;
-                        }
-                    }
                     if (f > s && f - s > 0 && f - s < 4) {
 
                     }
@@ -145,8 +142,22 @@ public class test {
                             position = k;
                         }
                     }
+                    if(k == list.get(i).length - 2 && times<=1){
+                        if(s > t && s - t > 0 && s - t < 4){
+
+                        }
+                        else if(f > s && f - s > 0 && f - s < 4 && f > t && f - t > 0 && f - t < 4){
+                            times ++;
+                            position = k;
+                        }
+                        else{
+                            times ++;
+                            position = k + 1;
+                        }
+                    }
                 }
-                if (position > -1 && llist.get(i)<4) {
+                if (position > -1 && times ==1) {
+                    ist.add(1);
                     w.get(i).remove(position);
                 }
             }
@@ -184,8 +195,7 @@ public class test {
             }
         }
         System.out.println(total);
-        System.out.println(wrong);
-        System.out.println(fix);
+        System.out.println(ist.size());
         System.out.println(fix + total);
         System.out.println(fix2);
     }
